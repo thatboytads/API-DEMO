@@ -42,8 +42,8 @@ message= "car not parked"
 @app.route("/")
 def index():
 	# return the rendered template
-	message= motion.Motion(pir1,pir2,buzz)
-	return render_template("sensor.html")
+	message, sensed_time= motion.Motion(pir1,pir2,buzz)
+	return render_template("sensor.html",sensed_time=sensed_time)
 
 
 @app.route('/ParkingAPI',methods=['GET'])

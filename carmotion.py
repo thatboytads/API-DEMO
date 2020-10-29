@@ -1,7 +1,7 @@
 from gpiozero import MotionSensor
 from gpiozero import LED
 import time
-
+from datetime import datetime
 
 class CarSensor:
 	def __init__(self):        
@@ -11,6 +11,8 @@ class CarSensor:
 
 	def motion_detect(self,pir1, pir2,buzz):
 		try:
+			current_time=[]
+			#sensed_time=""
 			while True:
 				cnt=pir1.motion_detected
 				if cnt==True and self.parked==0:
@@ -30,6 +32,13 @@ class CarSensor:
 							message= "car parked"
 							return message
 							continue
+				#if cnt==True and self.parked==1:
+				#	now= datetime.now()
+				#	current_time.append(now.strftime("%H:%M:%S"))
+				#	sensed_time = ' '.join([str(elem)for elem in current_time])
+				#	time.sleep(2)
+				#	message= "car parked"
+				#	return message, sensed_time
 				cnt2=pir2.motion_detected
 				if cnt2==True and self.parked==1:
 					print("Tip sensed moving back by 2nd")
